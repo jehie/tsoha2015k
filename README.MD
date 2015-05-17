@@ -5,6 +5,6 @@ http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Ostoskassi.
 
 Linkki sovellukseen (Siirtyy tod näk herokuun):
 
-* [Linkki Sovellukseen]http://t-johietan.users.cs.helsinki.fi/tsoha2015/)
+* [Linkki Sovellukseen] (http://t-johietan.users.cs.helsinki.fi/tsoha2015/)
 * [Linkki dokumentaatioon](https://github.com/jehie/tsoha2015k/blob/master/doc/Dokumentaatio.pdf)
 
