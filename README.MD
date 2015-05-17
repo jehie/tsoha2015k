@@ -1,8 +1,7 @@
-Tietokantasovellus - Kes‰ 2015 (TSOHA2015):
 
-Aihe: Ostoskassi:
+# Tietokantasovellus - Kes√§ 2015 (TSOHA2015): Ostoskassi:
 
 http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Ostoskassi.html
 
-Linkki sovellukseen (voi siirty‰ herokuun):
+Linkki sovellukseen (voi siirty√§ herokuun):
 http://t-johietan.users.cs.helsinki.fi/tsoha2015/
