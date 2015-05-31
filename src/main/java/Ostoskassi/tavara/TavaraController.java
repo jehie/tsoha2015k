@@ -42,7 +42,7 @@ public class TavaraController {
 //    }
     
     @RequestMapping(value="1", method = RequestMethod.GET)
-    public Object getTavara() throws SQLException, URISyntaxException{
+    public String getTavara() throws SQLException, URISyntaxException{
         
          Connection connection = GetPostGreSQLConnection.getConnection();
          Statement statement = connection.createStatement();
@@ -53,7 +53,7 @@ public class TavaraController {
         
         
         
-        return json.get(0);
+        return json.get(0).toString();
     }
     
 
