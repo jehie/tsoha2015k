@@ -21,8 +21,8 @@ public class OstoskassiApplication {
         SpringApplication.run(OstoskassiApplication.class, args);
         
         
-        GetPostGreSQLConnection conn = new GetPostGreSQLConnection();
-        Connection connection = conn.getConnection();
-        System.out.println(connection.getSchema());
+//        GetPostGreSQLConnection conn = new GetPostGreSQLConnection();
+//        Connection connection = conn.getConnection();
+//        System.out.println(connection.getSchema());
     }
 }
