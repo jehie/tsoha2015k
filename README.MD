@@ -5,7 +5,8 @@ http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Ostoskassi.
 
 Linkit:
 
-* [Linkki Sovellukseen] (https://intense-tundra-7058.herokuapp.com)
+* [Linkki Backend Sovellukseen] (https://intense-tundra-7058.herokuapp.com)
+* [Linkki FrontEnd osioon] (http://jehie.github.io/#) !Huom ainoastaa Tavara osa toimii, josta POST ei toimi CORS ongelmien takia kuin omalta koneelta. 
 * [Linkki dokumentaatioon](https://github.com/jehie/tsoha2015k/blob/master/doc/Dokumentaatio.pdf)
 * [Linkki Index.html](https://github.com/jehie/OstosFront/blob/master/public_html/index.html)
 * [Linkki sovelluksen muihin HTML sivuihin](https://github.com/jehie/OstosFront/tree/master/public_html/views)
