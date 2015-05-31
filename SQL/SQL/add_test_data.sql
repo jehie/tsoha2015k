@@ -6,3 +6,6 @@ INSERT INTO AterianValmistaja (nimi, maa, added) VALUES ('Unicafe', 'Valmistaa r
 INSERT INTO Ateria (Aterianvalmistaja_id, nimi, hinta, saatavilla, kuvaus, julkaistu, added) VALUES (1, 'Uunimakkara', 2, true,  'Herkullinen ja tuore uunimakkara-ateria', now(), now());
 INSERT INTO Kayttaja (username, password, admin, maa, added) VALUES ('adminx', 'adminx', true, 'finland', now());
 INSERT INTO Tilaukset (tilaaja_id, toimitettu, hinta, lentoID, added) VALUES (1, true, 25, 12, now());
+
+
+INSERT INTO Tavara (valmistaja_id, nimi, hinta, saatavilla, varastossa, kuvaus, julkaistu, added) VALUES (1, 'Samsung Galaxy S5', 550, true, 45, 'New Samsung Phone', now(), now());

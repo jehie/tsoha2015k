@@ -31,25 +31,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tavara")
 public class TavaraController {
 
-    //
-
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
-
-//    @RequestMapping("/tavara")
-//    public Tavara greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-//        return new Tavara(counter.incrementAndGet(),
-//                String.format(template, name));
-//    }
-    
+  
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public String getTavara(@PathVariable int id) throws SQLException, URISyntaxException{
         
          Connection connection = GetPostGreSQLConnection.getConnection();
          Statement statement = connection.createStatement();
          ResultSet resset = statement.executeQuery("SELECT * FROM Tavara where ID="+id);
-        ResultSetToJSON rs = new ResultSetToJSON();
-        JSONArray json = rs.convert(resset);
+        ResultSetToJSON jsonConverter = new ResultSetToJSON();
+        JSONArray json = jsonConverter.convert(resset);
         connection.close();
         
         
@@ -62,20 +52,25 @@ public class TavaraController {
          Connection connection = GetPostGreSQLConnection.getConnection();
          Statement statement = connection.createStatement();
          ResultSet resset = statement.executeQuery("SELECT * FROM Tavara");
-        ResultSetToJSON rs = new ResultSetToJSON();
-        JSONArray json = rs.convert(resset);
+        ResultSetToJSON jsonConverter = new ResultSetToJSON();
+        JSONArray jsonArray = jsonConverter.convert(resset);
         connection.close();
         
-        return json.toString();
+        return jsonArray.toString();
     }
     
 
     @RequestMapping(method = RequestMethod.POST)
-    public String postTavara(@RequestParam MultiValueMap<String, String> params) {
+    public String postTavara(@RequestParam String valmistaja_id, @RequestParam String nimi, @RequestParam String hinta, 
+            @RequestParam String saatavilla, @RequestParam String varastossa, @RequestParam String kuvaus) {
         String t ="";
         
         //params.get
         //t=t+params.get("name")+params.get("hinta");
+        
+        String statement = "INSERT INTO Tavara (valmistaja_id, nimi, hinta, saatavilla, varastossa, kuvaus, julkaistu,"
+                + " added) VALUES ("+valmistaja_id+", '" +nimi+"', "+hinta+", true, 45, '"+kuvaus+"', now(), now())";
+        
         
         return t;
     }
