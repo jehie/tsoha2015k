@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.concurrent.atomic.AtomicLong;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +42,7 @@ public class TavaraController {
 //    }
     
     @RequestMapping(value="1", method = RequestMethod.GET)
-    public String getTavara() throws SQLException, URISyntaxException{
+    public Object getTavara() throws SQLException, URISyntaxException{
         
          Connection connection = GetPostGreSQLConnection.getConnection();
          Statement statement = connection.createStatement();
@@ -52,7 +53,7 @@ public class TavaraController {
         
         
         
-        return (String) json.get(0);
+        return json.get(0);
     }
     
 
