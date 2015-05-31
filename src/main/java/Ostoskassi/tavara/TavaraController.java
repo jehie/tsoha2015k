@@ -62,7 +62,7 @@ public class TavaraController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String postTavara(@RequestParam String valmistaja_id, @RequestParam String nimi, @RequestParam String hinta, 
-            @RequestParam String saatavilla, @RequestParam String varastossa, @RequestParam String kuvaus) {
+            @RequestParam String saatavilla, @RequestParam String varastossa, @RequestParam String kuvaus) throws URISyntaxException, SQLException {
         String t ="";
         
         //params.get
@@ -70,8 +70,10 @@ public class TavaraController {
         
         String statement = "INSERT INTO Tavara (valmistaja_id, nimi, hinta, saatavilla, varastossa, kuvaus, julkaistu,"
                 + " added) VALUES ("+valmistaja_id+", '" +nimi+"', "+hinta+", true, 45, '"+kuvaus+"', now(), now())";
-        
-        
-        return t;
+        Connection connection = GetPostGreSQLConnection.getConnection();
+         Statement SQLstatement = connection.createStatement();
+         ResultSet resset = SQLstatement.executeQuery(statement);
+        connection.close();
+        return statement;
     }
 }
