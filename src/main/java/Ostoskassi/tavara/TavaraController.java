@@ -40,8 +40,8 @@ public class TavaraController {
 //                String.format(template, name));
 //    }
     
-    @RequestMapping(value="/tavara/", method = RequestMethod.GET)
-    public String getTavara(@RequestParam(value="id") int id) throws SQLException, URISyntaxException{
+    @RequestMapping(value="1", method = RequestMethod.GET)
+    public String getTavara() throws SQLException, URISyntaxException{
         
          Connection connection = GetPostGreSQLConnection.getConnection();
          Statement statement = connection.createStatement();
