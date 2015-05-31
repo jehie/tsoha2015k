@@ -72,7 +72,7 @@ public class TavaraController {
                 + " added) VALUES ("+valmistaja_id+", '" +nimi+"', "+hinta+", true, 45, '"+kuvaus+"', now(), now())";
         Connection connection = GetPostGreSQLConnection.getConnection();
          Statement SQLstatement = connection.createStatement();
-         ResultSet resset = SQLstatement.executeQuery(statement);
+         boolean done = SQLstatement.execute(statement);
         connection.close();
         return statement;
     }
