@@ -16,5 +16,7 @@ https://intense-tundra-7058.herokuapp.com/tavara
 
 tai 
 
-https://intense-tundra-7058.herokuapp.com/tavara/3
+https://intense-tundra-7058.herokuapp.com/tavara/3´
+
+Angularin kontrollerit taas: https://github.com/jehie/OstosFront/tree/master/public_html/js/controller
 
