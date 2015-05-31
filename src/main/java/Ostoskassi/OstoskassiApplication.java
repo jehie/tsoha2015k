@@ -12,15 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OstoskassiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OstoskassiApplication.class, args);
-        GetPostGreSQLConnection conn = new GetPostGreSQLConnection();
-        try {
-            Connection connection = conn.getConnection();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(OstoskassiApplication.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(OstoskassiApplication.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        SpringApplication.run(OstoskassiApplication.class, args); 
     }
 }
