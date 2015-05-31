@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,15 +42,15 @@ public class TavaraController {
 //                String.format(template, name));
 //    }
     
-    @RequestMapping(value="1", method = RequestMethod.GET)
-    public String getTavara() throws SQLException, URISyntaxException{
+    @RequestMapping(value="/{id}", method = RequestMethod.GET)
+    public String getTavara(@PathVariable int id) throws SQLException, URISyntaxException{
         
          Connection connection = GetPostGreSQLConnection.getConnection();
          Statement statement = connection.createStatement();
-         //ResultSet resset = statement.executeQuery("SELECT * FROM Tavara where ID="+id);
-         ResultSet resset = statement.executeQuery("SELECT * FROM Tavara where ID=1");
+         ResultSet resset = statement.executeQuery("SELECT * FROM Tavara where ID="+id);
         ResultSetToJSON rs = new ResultSetToJSON();
         JSONArray json = rs.convert(resset);
+        connection.close();
         
         
         return json.get(0).toString();
@@ -60,11 +61,10 @@ public class TavaraController {
         
          Connection connection = GetPostGreSQLConnection.getConnection();
          Statement statement = connection.createStatement();
-         //ResultSet resset = statement.executeQuery("SELECT * FROM Tavara where ID="+id);
          ResultSet resset = statement.executeQuery("SELECT * FROM Tavara");
         ResultSetToJSON rs = new ResultSetToJSON();
         JSONArray json = rs.convert(resset);
-        
+        connection.close();
         
         return json.toString();
     }
