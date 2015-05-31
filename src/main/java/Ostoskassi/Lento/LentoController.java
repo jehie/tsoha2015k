@@ -29,4 +29,10 @@ public class LentoController {
         return "Toimii";
     }
 
+    @ResponseBody
+    @RequestMapping("*")
+    public String greeting1() {
+        return "Toimii";
+    }
+
 }
