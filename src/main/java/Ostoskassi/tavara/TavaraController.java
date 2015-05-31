@@ -52,8 +52,21 @@ public class TavaraController {
         JSONArray json = rs.convert(resset);
         
         
-        
         return json.get(0).toString();
+    }
+    
+        @RequestMapping(method = RequestMethod.GET)
+    public String getTavarat() throws SQLException, URISyntaxException{
+        
+         Connection connection = GetPostGreSQLConnection.getConnection();
+         Statement statement = connection.createStatement();
+         //ResultSet resset = statement.executeQuery("SELECT * FROM Tavara where ID="+id);
+         ResultSet resset = statement.executeQuery("SELECT * FROM Tavara");
+        ResultSetToJSON rs = new ResultSetToJSON();
+        JSONArray json = rs.convert(resset);
+        
+        
+        return json.toString();
     }
     
 
