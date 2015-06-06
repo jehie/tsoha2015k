@@ -70,7 +70,7 @@ public class TavaraController {
     public String updateTavara(@PathVariable int Id, @RequestParam String kuvaus) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        statement.execute("UPDATE Tavara  SET kuvaus=TESTI WHERE id=" + Id);
+        statement.execute("UPDATE Tavara  SET kuvaus='"+kuvaus+"' WHERE id=" + Id);
         connection.close();
         //System.out.println(kuvaus);
         return "updated";
