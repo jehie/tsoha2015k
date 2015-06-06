@@ -57,13 +57,23 @@ public class TavaraController {
         return jsonArray.toString();
     }
 
-    @RequestMapping(value="/{Id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{Id}", method = RequestMethod.DELETE)
     public String deleteTavara(@PathVariable int Id) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        statement.execute("DELETE FROM Tavara WHERE id="+Id);
+        statement.execute("DELETE FROM Tavara WHERE id=" + Id);
         connection.close();
         return "deleted";
+    }
+
+    @RequestMapping(value = "/{Id}", method = RequestMethod.PUT)
+    public String updateTavara(@PathVariable int Id, @RequestParam String kuvaus) throws URISyntaxException, SQLException {
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        //statement.execute("DELETE FROM Tavara WHERE id=" + Id);
+        connection.close();
+        System.out.println(kuvaus);
+        return "updated";
     }
 
     @RequestMapping(method = RequestMethod.POST)
