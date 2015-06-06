@@ -58,10 +58,10 @@ public class TavaraController {
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public String deleteTavara(@RequestParam int id) throws URISyntaxException, SQLException {
+    public String deleteTavara() throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        statement.execute("DELETE FROM Tavara WHERE id="+id);
+        //statement.execute("DELETE FROM Tavara WHERE id="+id);
         connection.close();
         return "deleted";
     }
