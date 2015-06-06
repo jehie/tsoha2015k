@@ -57,7 +57,7 @@ public class TavaraController {
         return jsonArray.toString();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.DELETE)
     public String deleteTavara(@RequestParam int id) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
