@@ -67,12 +67,12 @@ public class TavaraController {
     }
 
     @RequestMapping(value = "/{Id}", method = RequestMethod.PUT)
-    public String updateTavara(@PathVariable int Id, @RequestParam String kuvaus) throws URISyntaxException, SQLException {
+    public String updateTavara(@PathVariable int Id) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
         //statement.execute("DELETE FROM Tavara WHERE id=" + Id);
         connection.close();
-        System.out.println(kuvaus);
+        //System.out.println(kuvaus);
         return "updated";
     }
 
