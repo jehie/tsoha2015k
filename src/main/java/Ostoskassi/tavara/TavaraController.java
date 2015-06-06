@@ -31,48 +31,53 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tavara")
 public class TavaraController {
 
-  
-    @RequestMapping(value="/{id}", method = RequestMethod.GET)
-    public String getTavara(@PathVariable int id) throws SQLException, URISyntaxException{
-        
-         Connection connection = GetPostGreSQLConnection.getConnection();
-         Statement statement = connection.createStatement();
-         ResultSet resset = statement.executeQuery("SELECT * FROM Tavara where ID="+id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String getTavara(@PathVariable int id) throws SQLException, URISyntaxException {
+
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resset = statement.executeQuery("SELECT * FROM Tavara where ID=" + id);
         ResultSetToJSON jsonConverter = new ResultSetToJSON();
         JSONArray json = jsonConverter.convert(resset);
         connection.close();
-        
-        
+
         return json.get(0).toString();
     }
-    
-        @RequestMapping(method = RequestMethod.GET)
-    public String getTavarat() throws SQLException, URISyntaxException{
-        
-         Connection connection = GetPostGreSQLConnection.getConnection();
-         Statement statement = connection.createStatement();
-         ResultSet resset = statement.executeQuery("SELECT * FROM Tavara");
+
+    @RequestMapping(method = RequestMethod.GET)
+    public String getTavarat() throws SQLException, URISyntaxException {
+
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resset = statement.executeQuery("SELECT * FROM Tavara");
         ResultSetToJSON jsonConverter = new ResultSetToJSON();
         JSONArray jsonArray = jsonConverter.convert(resset);
         connection.close();
-        
+
         return jsonArray.toString();
     }
-    
 
     @RequestMapping(method = RequestMethod.POST)
-    public String postTavara(@RequestParam String valmistaja_id, @RequestParam String nimi, @RequestParam String hinta, 
+    public String deleteTavara(@RequestParam int id) throws URISyntaxException, SQLException {
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        statement.execute("DELETE FROM Tavara WHERE id="+id);
+        connection.close();
+        return "deleted";
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String postTavara(@RequestParam String valmistaja_id, @RequestParam String nimi, @RequestParam String hinta,
             @RequestParam String saatavilla, @RequestParam String varastossa, @RequestParam String kuvaus) throws URISyntaxException, SQLException {
-        String t ="";
-        
+        String t = "";
+
         //params.get
         //t=t+params.get("name")+params.get("hinta");
-        
         String statement = "INSERT INTO Tavara (valmistaja_id, nimi, hinta, saatavilla, varastossa, kuvaus, julkaistu,"
-                + " added) VALUES ("+valmistaja_id+", '" +nimi+"', "+hinta+", true, 45, '"+kuvaus+"', now(), now())";
+                + " added) VALUES (" + valmistaja_id + ", '" + nimi + "', " + hinta + ", true, 45, '" + kuvaus + "', now(), now())";
         Connection connection = GetPostGreSQLConnection.getConnection();
-         Statement SQLstatement = connection.createStatement();
-         boolean done = SQLstatement.execute(statement);
+        Statement SQLstatement = connection.createStatement();
+        boolean done = SQLstatement.execute(statement);
         connection.close();
         return statement;
     }
