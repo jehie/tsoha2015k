@@ -71,6 +71,7 @@ public class AteriaController {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
         //statement.execute("UPDATE Ateria SET kuvaus='" + kuvaus + ", hinta=" + hinta + " WHERE id=" + Id);
+        statement.execute("UPDATE Ateria SET kuvaus='"+kuvaus+"', hinta="+hinta+" WHERE id=" + Id);
         connection.close();
         //System.out.println(kuvaus);
         return "updated";
