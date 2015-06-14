@@ -83,7 +83,7 @@ public class AteriaController {
 
         //params.get
         //t=t+params.get("name")+params.get("hinta");
-        String statement = "INSERT INTO Ateria (valmistaja_id, nimi, hinta, saatavilla, kuvaus, julkaistu,"
+        String statement = "INSERT INTO Ateria (Aterianvalmistaja_id, nimi, hinta, saatavilla, kuvaus, julkaistu,"
                 + " added) VALUES (" + Aterianvalmistaja_id + ", '" + nimi + "', " + hinta + ", true, '" + kuvaus + "', now(), now())";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
