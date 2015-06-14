@@ -15,6 +15,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
+
+/**
+ * Luokka säätää Spring-sovelluksen CORS-asetuksia salliakseen HTTP-pyynnöt muualta kuin samasta osoitteesta
+ *
+ * @author Jesse
+ */
 @Component
 public class SimpleCORSFilter implements Filter {
 

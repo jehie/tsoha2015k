@@ -13,11 +13,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * Luokka muuntaa ResultSet-tietokantavastauksen JSON-muotoiesksi
  *
  * @author Jesse
  */
 public class ResultSetToJSON {
 
+    /**
+     * Muuntaa ResultSet-tietokantavastauksen JSON-muotoiseksi
+     * @param rs ResultSet-tietokanta vastaus
+     * @return JSONArray
+     *
+     */
     public static JSONArray convert(ResultSet rs) throws SQLException, JSONException {
         JSONArray json = new JSONArray();
         ResultSetMetaData rsmd = rs.getMetaData();

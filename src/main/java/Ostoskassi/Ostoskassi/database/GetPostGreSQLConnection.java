@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
+ * Luokka muodostaa yhteyden PostGreSQL-tietokantaan
  *
  * @author Jesse
  */
@@ -30,16 +31,22 @@ public class GetPostGreSQLConnection {
 //        return conn;
 //
 //    }
-    
+
+    /**
+     *
+     * Metodi muodostaa tietokantayhteyden
+     *
+     * @return Tietokantayhteys Connection-oliona
+     *
+     */
     public static Connection getConnection() throws URISyntaxException, SQLException {
-    URI dbUri = new URI(System.getenv("DATABASE_URL"));
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
-    String username = dbUri.getUserInfo().split(":")[0];
-    String password = dbUri.getUserInfo().split(":")[1];
-    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
 
-    return DriverManager.getConnection(dbUrl, username, password);
-}
-    
-    
+        return DriverManager.getConnection(dbUrl, username, password);
+    }
+
 }

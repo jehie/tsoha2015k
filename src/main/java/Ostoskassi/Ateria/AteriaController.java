@@ -25,12 +25,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
+ * Ateria luokan Controlleri
+ *
  * @author Jesse
  */
 @RestController
 @RequestMapping("/ateria")
 public class AteriaController {
 
+    /**
+     *
+     * Palauttaa Aterian JSON-muodossa perustuen aterian ID:seen.
+     *
+     * @param id Tietyn Aterian ID
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getAteria(@PathVariable int id) throws SQLException, URISyntaxException {
 
@@ -44,6 +52,11 @@ public class AteriaController {
         return json.get(0).toString();
     }
 
+    /**
+     *
+     * Palauttaa kaikki ateriat JSON-muodossa
+     *
+     */
     @RequestMapping(method = RequestMethod.GET)
     public String getAteriat() throws SQLException, URISyntaxException {
 
@@ -57,6 +70,12 @@ public class AteriaController {
         return jsonArray.toString();
     }
 
+    /**
+     *
+     * Poistaa tietyn aterian
+     *
+     * @param id Tietyn Aterian ID
+     */
     @RequestMapping(value = "/{Id}", method = RequestMethod.DELETE)
     public String deleteTAteria(@PathVariable int Id) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
@@ -66,17 +85,37 @@ public class AteriaController {
         return "deleted";
     }
 
+    /**
+     *
+     * Päivitttää tietyn aterian tietoja.
+     *
+     * @param id Tietyn Aterian ID
+     * @param kuvaus Aterian uusi kuvaus
+     * @param hinta Aterian uusi hinta
+     *
+     */
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST)
     public String updateAteria(@PathVariable int Id, @RequestParam String kuvaus, @RequestParam int hinta) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
         //statement.execute("UPDATE Ateria SET kuvaus='" + kuvaus + ", hinta=" + hinta + " WHERE id=" + Id);
-        statement.execute("UPDATE Ateria SET kuvaus='"+kuvaus+"', hinta="+hinta+" WHERE id=" + Id);
+        statement.execute("UPDATE Ateria SET kuvaus='" + kuvaus + "', hinta=" + hinta + " WHERE id=" + Id);
         connection.close();
         //System.out.println(kuvaus);
         return "updated";
     }
 
+    /**
+     *
+     * Lisää uuden Aterian tietokantaan
+     *
+     * @param Aterianvalmistaja_id Aterian valmistajan id
+     * @param nimi Aterian nimi
+     * @param hinta Aterian hinta
+     * @param saatavilla Onko ateria saatavilla
+     * @param kuvaus Aterian kuvaus
+     *
+     */
     @RequestMapping(method = RequestMethod.POST)
     public String postAteria(@RequestParam String Aterianvalmistaja_id, @RequestParam String nimi, @RequestParam String hinta,
             @RequestParam String saatavilla, @RequestParam String kuvaus) throws URISyntaxException, SQLException {
