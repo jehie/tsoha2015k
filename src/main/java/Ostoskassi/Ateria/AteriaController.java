@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AteriaController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public String getTavara(@PathVariable int id) throws SQLException, URISyntaxException {
+    public String getAteria(@PathVariable int id) throws SQLException, URISyntaxException {
 
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
@@ -45,7 +45,7 @@ public class AteriaController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getTavarat() throws SQLException, URISyntaxException {
+    public String getAteriat() throws SQLException, URISyntaxException {
 
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
@@ -83,7 +83,7 @@ public class AteriaController {
 
         //params.get
         //t=t+params.get("name")+params.get("hinta");
-        String statement = "INSERT INTO Tavara (valmistaja_id, nimi, hinta, saatavilla, kuvaus, julkaistu,"
+        String statement = "INSERT INTO Ateria (valmistaja_id, nimi, hinta, saatavilla, kuvaus, julkaistu,"
                 + " added) VALUES (" + Aterianvalmistaja_id + ", '" + nimi + "', " + hinta + ", true, '" + kuvaus + "', now(), now())";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
