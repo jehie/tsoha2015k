@@ -67,10 +67,10 @@ public class AteriaController {
     }
 
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST)
-    public String updateAteria(@PathVariable int Id, @RequestParam String kuvaus, @RequestParam int hinta, @RequestParam int varastossa) throws URISyntaxException, SQLException {
+    public String updateAteria(@PathVariable int Id, @RequestParam String kuvaus, @RequestParam int hinta) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        statement.execute("UPDATE Ateria  SET kuvaus='" + kuvaus + "', varastossa=" + varastossa + ", hinta=" + hinta + " WHERE id=" + Id);
+        statement.execute("UPDATE Ateria  SET kuvaus='" + kuvaus + ", hinta=" + hinta + " WHERE id=" + Id);
         connection.close();
         //System.out.println(kuvaus);
         return "updated";
@@ -83,8 +83,8 @@ public class AteriaController {
 
         //params.get
         //t=t+params.get("name")+params.get("hinta");
-        String statement = "INSERT INTO Tavara (valmistaja_id, nimi, hinta, saatavilla, varastossa, kuvaus, julkaistu,"
-                + " added) VALUES (" + Aterianvalmistaja_id + ", '" + nimi + "', " + hinta + ", true, 45, '" + kuvaus + "', now(), now())";
+        String statement = "INSERT INTO Tavara (valmistaja_id, nimi, hinta, saatavilla, kuvaus, julkaistu,"
+                + " added) VALUES (" + Aterianvalmistaja_id + ", '" + nimi + "', " + hinta + ", true, '" + kuvaus + "', now(), now())";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
         boolean done = SQLstatement.execute(statement);
