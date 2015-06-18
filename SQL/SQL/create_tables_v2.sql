@@ -29,11 +29,8 @@ CREATE TABLE Ateria(
 
 CREATE TABLE Kayttaja(
   id SERIAL PRIMARY KEY,
-  username varchar(20) NOT NULL,
-  password varchar(20) NOT NULL,
-  admin boolean DEFAULT false,
-  maa varchar(20),
-  added DATE
+  email varchar(50) NOT NULL,
+  admin boolean DEFAULT false
 );
 
 CREATE TABLE Tilaukset(
