@@ -52,9 +52,12 @@ public class KayttajaController {
         ResultSet resset = statement.executeQuery("SELECT * FROM Kayttaja where email='" + email+"'");
         connection.close();
         
-        resset.next();
+        boolean isAdmin = false;
+        while(resset.next()){
+          isAdmin = resset.getBoolean("admin"); 
+        }
         
-        boolean isAdmin = resset.getBoolean("admin");
+        
 
         return isAdmin;
     }
