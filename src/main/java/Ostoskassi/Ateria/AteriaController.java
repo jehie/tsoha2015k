@@ -118,7 +118,7 @@ public class AteriaController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public String postAteria(@RequestParam String Aterianvalmistaja_id, @RequestParam String nimi, @RequestParam String hinta,
-            @RequestParam String saatavilla, @RequestParam String kuvaus, @RequestParam int varastossa) throws URISyntaxException, SQLException {
+            @RequestParam String saatavilla, @RequestParam String kuvaus) throws URISyntaxException, SQLException {
         String t = "";
 
         //params.get
