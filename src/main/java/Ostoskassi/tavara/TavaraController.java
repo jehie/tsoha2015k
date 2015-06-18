@@ -125,7 +125,7 @@ public class TavaraController {
         //params.get
         //t=t+params.get("name")+params.get("hinta");
         String statement = "INSERT INTO Tavara (valmistaja_id, nimi, hinta, saatavilla, varastossa, kuvaus, julkaistu,"
-                + " added) VALUES (" + valmistaja_id + ", '" + nimi + "', " + hinta + ", true, 45, '" + kuvaus + "', now(), now())";
+                + " added) VALUES (" + valmistaja_id + ", '" + nimi + "', " + hinta + ", "+saatavilla+", "+varastossa+", '" + kuvaus + "', now(), now())";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
         boolean done = SQLstatement.execute(statement);

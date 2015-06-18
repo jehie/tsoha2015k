@@ -118,13 +118,13 @@ public class AteriaController {
      */
     @RequestMapping(method = RequestMethod.POST)
     public String postAteria(@RequestParam String Aterianvalmistaja_id, @RequestParam String nimi, @RequestParam String hinta,
-            @RequestParam String saatavilla, @RequestParam String kuvaus) throws URISyntaxException, SQLException {
+            @RequestParam String saatavilla, @RequestParam String kuvaus, @RequestParam int varastossa) throws URISyntaxException, SQLException {
         String t = "";
 
         //params.get
         //t=t+params.get("name")+params.get("hinta");
         String statement = "INSERT INTO Ateria (Aterianvalmistaja_id, nimi, hinta, saatavilla, kuvaus, julkaistu,"
-                + " added) VALUES (" + Aterianvalmistaja_id + ", '" + nimi + "', " + hinta + ", true, '" + kuvaus + "', now(), now())";
+                + " added) VALUES (" + Aterianvalmistaja_id + ", '" + nimi + "', " + hinta + ", "+saatavilla+", '" + kuvaus + "', now(), now())";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
         boolean done = SQLstatement.execute(statement);
