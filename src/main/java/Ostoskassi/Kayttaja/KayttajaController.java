@@ -44,7 +44,7 @@ public class KayttajaController {
      *
      * @param id Tietyn Aterian ID
      */
-    @RequestMapping(value = "/{email}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{email:.+}", method = RequestMethod.GET)
     public boolean isUserAdmin(@PathVariable String email) throws SQLException, URISyntaxException {
 
         Connection connection = GetPostGreSQLConnection.getConnection();
