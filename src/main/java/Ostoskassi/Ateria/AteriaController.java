@@ -95,11 +95,11 @@ public class AteriaController {
      *
      */
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST)
-    public String updateAteria(@PathVariable int Id, @RequestParam String kuvaus, @RequestParam int hinta) throws URISyntaxException, SQLException {
+    public String updateAteria(@PathVariable int Id, @RequestParam String kuvaus, @RequestParam int hinta, @RequestParam boolean saatavilla) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
         //statement.execute("UPDATE Ateria SET kuvaus='" + kuvaus + ", hinta=" + hinta + " WHERE id=" + Id);
-        statement.execute("UPDATE Ateria SET kuvaus='" + kuvaus + "', hinta=" + hinta + " WHERE id=" + Id);
+        statement.execute("UPDATE Ateria SET kuvaus='" + kuvaus + "', hinta=" + hinta + ", saatavilla=" +saatavilla +" WHERE id=" + Id);
         connection.close();
         //System.out.println(kuvaus);
         return "updated";
@@ -117,14 +117,14 @@ public class AteriaController {
      *
      */
     @RequestMapping(method = RequestMethod.POST)
-    public String postAteria(@RequestParam String Aterianvalmistaja_id, @RequestParam String nimi, @RequestParam String hinta,
+    public String postAteria(@RequestParam String nimi, @RequestParam String hinta,
             @RequestParam String saatavilla, @RequestParam String kuvaus) throws URISyntaxException, SQLException {
         String t = "";
 
         //params.get
         //t=t+params.get("name")+params.get("hinta");
-        String statement = "INSERT INTO Ateria (Aterianvalmistaja_id, nimi, hinta, saatavilla, kuvaus, julkaistu,"
-                + " added) VALUES (" + Aterianvalmistaja_id + ", '" + nimi + "', " + hinta + ", "+saatavilla+", '" + kuvaus + "', now(), now())";
+        String statement = "INSERT INTO Ateria (nimi, hinta, saatavilla, kuvaus, "
+                + " lisatty) VALUES ("+ nimi + "', " + hinta + ", "+saatavilla+", '" + kuvaus + "', now())";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
         boolean done = SQLstatement.execute(statement);
