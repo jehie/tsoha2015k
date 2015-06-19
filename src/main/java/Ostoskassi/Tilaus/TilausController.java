@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,7 +38,7 @@ public class TilausController {
 
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resset = statement.executeQuery("SELECT * FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='"+email+"')");
+        ResultSet resset = statement.executeQuery("SELECT * FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='" + email + "')");
         connection.close();
 
         ResultSetToJSON jsonConverter = new ResultSetToJSON();
@@ -45,6 +46,18 @@ public class TilausController {
 
         return json.get(0).toString();
 
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String postAteria(@RequestParam String email, @RequestParam int hinta,
+            @RequestParam int lentoID) throws URISyntaxException, SQLException {
+
+        String statement = "INSERT INTO tilaus(tilaaja_id, toimitettu, yhteishinta, lentoid, added) VALUES ((SELECT id FROM kayttaja WHERE email='" + email + "'), false, " + hinta + ", " + lentoID + ", now());";
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement SQLstatement = connection.createStatement();
+        boolean done = SQLstatement.execute(statement);
+        connection.close();
+        return statement;
     }
 
 }
