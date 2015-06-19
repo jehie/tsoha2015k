@@ -9,3 +9,7 @@ INSERT INTO Tilaukset (tilaaja_id, toimitettu, hinta, lentoID, added) VALUES (1,
 
 
 INSERT INTO Tavara (valmistaja_id, nimi, hinta, saatavilla, varastossa, kuvaus, julkaistu, added) VALUES (1, 'Samsung Galaxy S5', 550, true, 45, 'New Samsung Phone', now(), now());
+INSERT INTO lento( tunnus) VALUES ('SIIPI-123');
+INSERT INTO lento( tunnus) VALUES ('SIIPI-555');
+INSERT INTO lento( tunnus) VALUES ('SIIPI-666');
+INSERT INTO lento( tunnus) VALUES ('SIIPI-852');
