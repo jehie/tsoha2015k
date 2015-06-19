@@ -37,7 +37,7 @@ public class TilausController {
 
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resset = statement.executeQuery("SELECT * FROM tilaus where id='(SELECT id FROM Kayttaja WHERE email='" + email + "')'");
+        ResultSet resset = statement.executeQuery("SELECT * FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='"+email+"')");
         connection.close();
 
         ResultSetToJSON jsonConverter = new ResultSetToJSON();
