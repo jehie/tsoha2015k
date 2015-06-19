@@ -26,6 +26,10 @@ CREATE TABLE Ateria(
   lisatty DATE
 );
 
+CREATE TABLE Lento(
+  id SERIAL PRIMARY KEY,
+  tunnus varchar(50) NOT NULL,
+);
 
 CREATE TABLE Kayttaja(
   id SERIAL PRIMARY KEY,
@@ -33,12 +37,12 @@ CREATE TABLE Kayttaja(
   admin boolean DEFAULT false
 );
 
-CREATE TABLE Tilaukset(
+CREATE TABLE Tilaus(
   id SERIAL PRIMARY KEY,
   tilaaja_id INTEGER REFERENCES Kayttaja(id), 
   toimitettu boolean DEFAULT false,
-  hinta int,
-  lentoID varchar(20),
+  yhteishinta int,
+  lentoID INTEGER REFERENCES Lento(id),
   added DATE
 );
 
