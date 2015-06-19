@@ -49,15 +49,30 @@ public class TilausController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String postAteria(@RequestParam String email, @RequestParam int hinta,
+    public String postTilaus(@RequestParam String email, @RequestParam int hinta,
             @RequestParam int lentoID, @RequestParam int ateriaID) throws URISyntaxException, SQLException {
 
-        String statement = "INSERT INTO tilaus(tilaaja_id, toimitettu, ateria_id, yhteishinta, lentoid, added) VALUES ((SELECT id FROM kayttaja WHERE email='" + email + "'), false, " +ateriaID+" ," + hinta + ", " + lentoID + ", now());";
+        String statement = "INSERT INTO tilaus(tilaaja_id, toimitettu, ateria_id, yhteishinta, lentoid, added) VALUES ((SELECT id FROM kayttaja WHERE email='" + email + "'), false, " + ateriaID + " ," + hinta + ", " + lentoID + ", now());";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
         boolean done = SQLstatement.execute(statement);
         connection.close();
         return statement;
+    }
+
+    @RequestMapping(value = "/{email:.+}/last", method = RequestMethod.GET)
+    public String getLastTilausByEmail(@PathVariable String email) throws SQLException, URISyntaxException {
+
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resset = statement.executeQuery("SELECT * FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='" + email + "' ORDER BY id DESC LIMIT 1)");
+        connection.close();
+
+        ResultSetToJSON jsonConverter = new ResultSetToJSON();
+        JSONArray json = jsonConverter.convert(resset);
+
+        return json.get(0).toString();
+
     }
 
 }
