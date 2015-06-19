@@ -41,9 +41,17 @@ CREATE TABLE Tilaus(
   id SERIAL PRIMARY KEY,
   tilaaja_id INTEGER REFERENCES Kayttaja(id), 
   toimitettu boolean DEFAULT false,
+  ateria_id INTEGER REFERENCES Ateria(id),
   yhteishinta int,
   lentoID INTEGER REFERENCES Lento(id),
   added DATE
+);
+
+CREATE TABLE Tilaustiedot(
+  id SERIAL PRIMARY KEY,
+  tilausID INTEGER REFERENCES tilaus(id), 
+  tavaraID INTEGER REFERENCES tavara(id),
+  kpl INTEGER
 );
 
 

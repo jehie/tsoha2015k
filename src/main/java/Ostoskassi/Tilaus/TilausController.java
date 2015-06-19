@@ -50,9 +50,9 @@ public class TilausController {
 
     @RequestMapping(method = RequestMethod.POST)
     public String postAteria(@RequestParam String email, @RequestParam int hinta,
-            @RequestParam int lentoID) throws URISyntaxException, SQLException {
+            @RequestParam int lentoID, @RequestParam int ateriaID) throws URISyntaxException, SQLException {
 
-        String statement = "INSERT INTO tilaus(tilaaja_id, toimitettu, yhteishinta, lentoid, added) VALUES ((SELECT id FROM kayttaja WHERE email='" + email + "'), false, " + hinta + ", " + lentoID + ", now());";
+        String statement = "INSERT INTO tilaus(tilaaja_id, toimitettu, ateria_id, yhteishinta, lentoid, added) VALUES ((SELECT id FROM kayttaja WHERE email='" + email + "'), false, " +ateriaID+" ," + hinta + ", " + lentoID + ", now());";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
         boolean done = SQLstatement.execute(statement);
