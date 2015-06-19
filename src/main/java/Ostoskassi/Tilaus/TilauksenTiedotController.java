@@ -27,7 +27,7 @@ public class TilauksenTiedotController {
     public String postTilauksenTiedot(@RequestParam String email, @RequestParam int kpl,
             @RequestParam int tavaraID) throws URISyntaxException, SQLException {
 
-        String statement = "INSERT INTO tilaustiedot( tilausid, tavaraid, kpl) VALUES ((SELECT id FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='" + email + "' ORDER BY id DESC LIMIT 1)), " + tavaraID + ", " + kpl + ");";
+        String statement = "INSERT INTO tilaustiedot( tilausid, tavaraid, kpl) VALUES ((SELECT id FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='" + email + "') ORDER BY id DESC LIMIT 1)), " + tavaraID + ", " + kpl + ");";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
         boolean done = SQLstatement.execute(statement);
