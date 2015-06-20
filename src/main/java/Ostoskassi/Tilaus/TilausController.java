@@ -44,7 +44,7 @@ public class TilausController {
         ResultSetToJSON jsonConverter = new ResultSetToJSON();
         JSONArray json = jsonConverter.convert(resset);
 
-        return json.get(0).toString();
+        return json.toString();
 
     }
 

@@ -13,3 +13,12 @@ INSERT INTO lento( tunnus) VALUES ('SIIPI-123');
 INSERT INTO lento( tunnus) VALUES ('SIIPI-555');
 INSERT INTO lento( tunnus) VALUES ('SIIPI-666');
 INSERT INTO lento( tunnus) VALUES ('SIIPI-852');
+
+INSERT INTO tilaus(tilaaja_id, toimitettu, yhteishinta, lentoid, added) VALUES (2, false, 500, 2, now());
+
+INSERT INTO tilaustiedot(
+             tilausid, tavaraid, kpl)
+    VALUES ( 1, 25, 5);
+
+INSERT INTO tilaustiedot( tilausid, tavaraid, kpl) VALUES ((SELECT id FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='moi@moi.com') ORDER BY id DESC LIMIT 1), 25, 5);
+INSERT INTO tilaustiedot( tilausid, tavaraid, kpl) VALUES ((SELECT id FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='moi@moi.com') ORDER BY id DESC LIMIT 1), 26, 1);
