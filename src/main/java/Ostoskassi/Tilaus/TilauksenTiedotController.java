@@ -50,7 +50,7 @@ public class TilauksenTiedotController {
 
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resset = statement.executeQuery("SELECT * FROM Tilaustiedot where tilaus_id=" + id);
+        ResultSet resset = statement.executeQuery("SELECT * FROM Tilaustiedot where tilausid=" + id);
         connection.close();
 
         ResultSetToJSON jsonConverter = new ResultSetToJSON();
