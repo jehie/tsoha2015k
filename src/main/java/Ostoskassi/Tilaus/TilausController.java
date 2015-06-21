@@ -75,7 +75,7 @@ public class TilausController {
 
     }
 
-        /**
+    /**
      *
      * Poistaa tietyn aterian
      *
@@ -85,14 +85,25 @@ public class TilausController {
     public String deleteTilaus(@PathVariable int Id) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        statement.execute("DELETE FROM tilaustiedot WHERE tilausid IN (SELECT id FROM Tilaus WHERE id="+Id+");");
-        statement.execute("DELETE FROM Tilaus where id = "+Id);
+        statement.execute("DELETE FROM tilaustiedot WHERE tilausid IN (SELECT id FROM Tilaus WHERE id=" + Id + ");");
+        statement.execute("DELETE FROM Tilaus where id = " + Id);
         connection.close();
         return "deleted";
     }
 
-    
-    
-
+    /**
+     *
+     * Poistaa tietyn aterian
+     *
+     * @param id Tietyn Aterian ID
+     */
+    @RequestMapping(value = "/{Id}/toimita", method = RequestMethod.POST)
+    public String toimitaTilaus(@PathVariable int Id) throws URISyntaxException, SQLException {
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        statement.execute("UPDATE Tilaus SET toimitettu=true WHERE id="+ Id);
+        connection.close();
+        return "Tilaus toimitettu";
+    }
 
 }
