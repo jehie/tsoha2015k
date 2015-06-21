@@ -81,7 +81,7 @@ public class TilauksenTiedotController {
     public String deleteTilaus(@PathVariable int Id) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        statement.execute("DELETE FROM tilaustiedot WHERE tilausid=" + Id);
+        statement.execute("DELETE FROM tilaustiedot WHERE id=" + Id);
         connection.close();
         return "deleted";
     }
