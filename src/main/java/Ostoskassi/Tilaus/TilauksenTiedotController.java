@@ -27,6 +27,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tilaustiedot")
 public class TilauksenTiedotController {
 
+    /**
+     *
+     * Postaa uuden Tilaustieto rivin Tilaustieto tietokantaan.
+     *
+     * @param email käyttäjän email jonka perusteella haetaan oikea tilaus
+     * @param kpl monta kappaletta tuotetta on
+     * @param tavaraID Tilatun tavaran ID
+     */
     @RequestMapping(method = RequestMethod.POST)
     public String postTilauksenTiedot(@RequestParam String email, @RequestParam int kpl,
             @RequestParam int tavaraID) throws URISyntaxException, SQLException {
@@ -44,6 +52,7 @@ public class TilauksenTiedotController {
      * Palauttaa tiettyyn tilaukseen liittyvät välitaulut (tilaustiet).
      *
      * @param id Tietyn Tilauksen ID
+     * @return Palauttaa JSON-muodossa tilauksen tiedot
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getTilaustiedotByID(@PathVariable int id) throws SQLException, URISyntaxException {
