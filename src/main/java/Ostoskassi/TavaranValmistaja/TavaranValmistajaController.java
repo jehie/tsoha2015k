@@ -32,7 +32,7 @@ public class TavaranValmistajaController {
 
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resset = statement.executeQuery("SELECT * FROM Tavanvalmistaja");
+        ResultSet resset = statement.executeQuery("SELECT * FROM Tavaranvalmistaja");
         ResultSetToJSON jsonConverter = new ResultSetToJSON();
         JSONArray jsonArray = jsonConverter.convert(resset);
         connection.close();
