@@ -40,7 +40,7 @@ public class TilauksenTiedotController {
             @RequestParam int tavaraID) throws URISyntaxException, SQLException {
 
         String statement = "INSERT INTO tilaustiedot( tilausid, tavaraid, kpl) VALUES ((SELECT id FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='" + email + "') ORDER BY id DESC LIMIT 1), " + tavaraID + ", " + kpl + ");";
-        String paivitaKPLMaara = "UPDATE Tavara SET varastossa = varastossa - "+kpl +" where id=" +tavaraID;
+        String paivitaKPLMaara = "UPDATE Tavara SET varastossa = varastossa - " + kpl + " where id=" + tavaraID;
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
         SQLstatement.execute(statement);
@@ -69,6 +69,53 @@ public class TilauksenTiedotController {
 
         return json.toString();
 
+    }
+
+    /**
+     *
+     * Poistaa tietyn tilaustiedon
+     *
+     * @param id Tietyn Tilaustiedon ID
+     */
+    @RequestMapping(value = "/{Id}", method = RequestMethod.DELETE)
+    public String deleteTilaus(@PathVariable int Id) throws URISyntaxException, SQLException {
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        statement.execute("DELETE FROM tilaustiedot WHERE tilausid=" + Id);
+        connection.close();
+        return "deleted";
+    }
+
+    /**
+     *
+     * Poistaa tietyn tilaustiedon
+     *
+     * @param id Tietyn Tilaustiedon ID
+     */
+    @RequestMapping(value = "/{Id}/vahenna", method = RequestMethod.POST)
+    public String updateTilaustietoVahenna(@PathVariable int Id) throws URISyntaxException, SQLException {
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        statement.execute("UPDATE tilaustiedot SET kpl = kpl - 1 WHERE id=" + Id);
+        statement.execute("UPDATE Tavara SET varastossa = varastossa - 1 where id= (SELECT tavaraID from tilaustiedot WHERE id=" + Id + ")");
+        connection.close();
+        return "deleted";
+    }
+
+    /**
+     *
+     * Poistaa tietyn tilaustiedon
+     *
+     * @param id Tietyn Tilaustiedon ID
+     */
+    @RequestMapping(value = "/{Id}/lisaa", method = RequestMethod.POST)
+    public String updateTilaustietoLisaa(@PathVariable int Id) throws URISyntaxException, SQLException {
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        statement.execute("UPDATE tilaustiedot SET kpl = kpl + 1 WHERE id=" + Id);
+        statement.execute("UPDATE Tavara SET varastossa = varastossa + 1 where id= (SELECT tavaraID from tilaustiedot WHERE id=" + Id + ")");
+        connection.close();
+        return "deleted";
     }
 
 }
