@@ -96,10 +96,10 @@ public class TavaraController {
      *
      */
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST)
-    public String updateTavara(@PathVariable int Id, @RequestParam String kuvaus, @RequestParam int hinta, @RequestParam int varastossa) throws URISyntaxException, SQLException {
+    public String updateTavara(@PathVariable int Id, @RequestParam String kuvaus, @RequestParam int hinta, @RequestParam int varastossa, @RequestParam boolean saatavilla) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        statement.execute("UPDATE Tavara  SET kuvaus='" + kuvaus + "', varastossa=" + varastossa + ", hinta=" + hinta + " WHERE id=" + Id);
+        statement.execute("UPDATE Tavara  SET kuvaus='" + kuvaus + "', varastossa=" + varastossa + ", hinta=" + hinta + ", saatavilla=" + saatavilla +" WHERE id=" + Id);
         connection.close();
         //System.out.println(kuvaus);
         return "updated";

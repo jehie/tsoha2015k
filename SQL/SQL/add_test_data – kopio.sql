@@ -22,3 +22,7 @@ INSERT INTO tilaustiedot(
 
 INSERT INTO tilaustiedot( tilausid, tavaraid, kpl) VALUES ((SELECT id FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='moi@moi.com') ORDER BY id DESC LIMIT 1), 25, 5);
 INSERT INTO tilaustiedot( tilausid, tavaraid, kpl) VALUES ((SELECT id FROM tilaus where tilaaja_id=(SELECT id FROM kayttaja WHERE email='moi@moi.com') ORDER BY id DESC LIMIT 1), 26, 1);
+
+INSERT INTO tavaranvalmistaja(nimi, maa, added) VALUES ('Nokia Oy', 'Finland', now());
+INSERT INTO tavaranvalmistaja(nimi, maa, added) VALUES ('Samsung', 'Etelä-Korea', now());
+INSERT INTO tavaranvalmistaja(nimi, maa, added) VALUES ('Dove', 'USA', now());
