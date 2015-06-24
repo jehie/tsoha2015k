@@ -74,7 +74,7 @@ public class TavaraController {
      * Palauttaa kaikki tilatut Tavarat JSON-muodossa
      *
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/tilatut", method = RequestMethod.GET)
     public String getTavaratJotkaTilattu() throws SQLException, URISyntaxException {
 
         Connection connection = GetPostGreSQLConnection.getConnection();
