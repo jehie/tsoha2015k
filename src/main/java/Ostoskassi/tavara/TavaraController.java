@@ -32,7 +32,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/tavara")
 public class TavaraController {
 
-    
     /**
      *
      * Palauttaa tietyn Tavaran JSON-muodossa
@@ -72,6 +71,24 @@ public class TavaraController {
 
     /**
      *
+     * Palauttaa kaikki tilatut Tavarat JSON-muodossa
+     *
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    public String getTavaratJotkaTilattu() throws SQLException, URISyntaxException {
+
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resset = statement.executeQuery("SELECT id FROM Tavara WHERE tavara.id IN (SELECT tavaraID from Tilaustiedot)");
+        ResultSetToJSON jsonConverter = new ResultSetToJSON();
+        JSONArray jsonArray = jsonConverter.convert(resset);
+        connection.close();
+
+        return jsonArray.toString();
+    }
+
+    /**
+     *
      * Poistaa tietyn Tavaran
      *
      * @param id Tietyn Tavaran ID
@@ -99,7 +116,7 @@ public class TavaraController {
     public String updateTavara(@PathVariable int Id, @RequestParam String kuvaus, @RequestParam int hinta, @RequestParam int varastossa, @RequestParam boolean saatavilla) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        statement.execute("UPDATE Tavara  SET kuvaus='" + kuvaus + "', varastossa=" + varastossa + ", hinta=" + hinta + ", saatavilla=" + saatavilla +" WHERE id=" + Id);
+        statement.execute("UPDATE Tavara  SET kuvaus='" + kuvaus + "', varastossa=" + varastossa + ", hinta=" + hinta + ", saatavilla=" + saatavilla + " WHERE id=" + Id);
         connection.close();
         //System.out.println(kuvaus);
         return "updated";
@@ -125,7 +142,7 @@ public class TavaraController {
         //params.get
         //t=t+params.get("name")+params.get("hinta");
         String statement = "INSERT INTO Tavara (valmistaja_id, nimi, hinta, saatavilla, varastossa, kuvaus, julkaistu,"
-                + " added) VALUES (" + valmistaja_id + ", '" + nimi + "', " + hinta + ", "+saatavilla+", "+varastossa+", '" + kuvaus + "', now(), now())";
+                + " added) VALUES (" + valmistaja_id + ", '" + nimi + "', " + hinta + ", " + saatavilla + ", " + varastossa + ", '" + kuvaus + "', now(), now())";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
         boolean done = SQLstatement.execute(statement);
