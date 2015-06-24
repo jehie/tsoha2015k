@@ -127,4 +127,19 @@ public class TilausController {
         return "Tilaus toimitettu";
     }
 
+    /**
+     *
+     * Poistaa tietyn aterian
+     *
+     * @param id Tietyn Aterian ID
+     */
+    @RequestMapping(value = "/{Id}/hinta", method = RequestMethod.POST)
+    public String paivitaTilauksenHinta(@PathVariable int Id, @RequestParam int hinta) throws URISyntaxException, SQLException {
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        statement.execute("UPDATE Tilaus SET yhteishinta=" + hinta + " WHERE id=" + Id);
+        connection.close();
+        return "Tilaus toimitettu";
+    }
+
 }
