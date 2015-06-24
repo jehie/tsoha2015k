@@ -48,6 +48,27 @@ public class TilausController {
 
     }
 
+    /**
+     *
+     * Palauttaa Aterian JSON-muodossa perustuen aterian ID:seen.
+     *
+     * @param id Tietyn Aterian ID
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    public String getTilaukset() throws SQLException, URISyntaxException {
+
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resset = statement.executeQuery("SELECT * FROM tilaus");
+        connection.close();
+
+        ResultSetToJSON jsonConverter = new ResultSetToJSON();
+        JSONArray json = jsonConverter.convert(resset);
+
+        return json.toString();
+
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public String postTilaus(@RequestParam String email, @RequestParam int hinta,
             @RequestParam int lentoID, @RequestParam int ateriaID) throws URISyntaxException, SQLException {
@@ -101,7 +122,7 @@ public class TilausController {
     public String toimitaTilaus(@PathVariable int Id) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        statement.execute("UPDATE Tilaus SET toimitettu=true WHERE id="+ Id);
+        statement.execute("UPDATE Tilaus SET toimitettu=true WHERE id=" + Id);
         connection.close();
         return "Tilaus toimitettu";
     }
