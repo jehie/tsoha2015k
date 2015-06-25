@@ -54,7 +54,7 @@ public class AteriaController {
      * @throws java.sql.SQLException
      * @throws java.net.URISyntaxException
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/tilatut",method = RequestMethod.GET)
     public String getTilatutAteriat() throws SQLException, URISyntaxException {
 
         Connection connection = GetPostGreSQLConnection.getConnection();
