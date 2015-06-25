@@ -59,7 +59,7 @@ public class AteriaController {
 
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resset = statement.executeQuery("SELECT id FROM Ateria WHERE id IN (SELECT ateria_id from Tilaustiedot)");
+        ResultSet resset = statement.executeQuery("SELECT id FROM Ateria WHERE id IN (SELECT ateria_id from Tilaus)");
         ResultSetToJSON jsonConverter = new ResultSetToJSON();
         JSONArray jsonArray = jsonConverter.convert(resset);
         connection.close();
