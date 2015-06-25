@@ -1,14 +1,15 @@
 package Ostoskassi;
 
-import Ostoskassi.Ostoskassi.database.GetPostGreSQLConnection;
 import java.net.URISyntaxException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Luokka Spring-sovelluksen käynnistämiseen
+ *
+ * @author Jesse
+ */
 @SpringBootApplication
 public class OstoskassiApplication {
 
@@ -19,10 +20,5 @@ public class OstoskassiApplication {
         }
         System.setProperty("server.port", webPort);
         SpringApplication.run(OstoskassiApplication.class, args);
-        
-        
-//        GetPostGreSQLConnection conn = new GetPostGreSQLConnection();
-//        Connection connection = conn.getConnection();
-//        System.out.println(connection.getSchema());
     }
 }

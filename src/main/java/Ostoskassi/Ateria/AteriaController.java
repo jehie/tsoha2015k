@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Ostoskassi.Ateria;
 
 import Ostoskassi.Ostoskassi.database.GetPostGreSQLConnection;
@@ -12,11 +7,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.concurrent.atomic.AtomicLong;
 import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +29,9 @@ public class AteriaController {
      * Palauttaa Aterian JSON-muodossa perustuen aterian ID:seen.
      *
      * @param id Tietyn Aterian ID
+     * @return Ateria JSON-muodossa
+     * @throws java.sql.SQLException
+     * @throws java.net.URISyntaxException
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getAteria(@PathVariable int id) throws SQLException, URISyntaxException {
@@ -54,8 +48,32 @@ public class AteriaController {
 
     /**
      *
+     * Palauttaa kaikki tilatut ateriat JSON-muodossa
+     *
+     * @return Tilatut Ateriat JSON-muodossa
+     * @throws java.sql.SQLException
+     * @throws java.net.URISyntaxException
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    public String getTilatutAteriat() throws SQLException, URISyntaxException {
+
+        Connection connection = GetPostGreSQLConnection.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resset = statement.executeQuery("SELECT id FROM Ateria WHERE id IN (SELECT ateria_id from Tilaustiedot)");
+        ResultSetToJSON jsonConverter = new ResultSetToJSON();
+        JSONArray jsonArray = jsonConverter.convert(resset);
+        connection.close();
+
+        return jsonArray.toString();
+    }
+
+    /**
+     *
      * Palauttaa kaikki ateriat JSON-muodossa
      *
+     * @return Ateriat JSON-muodossa
+     * @throws java.sql.SQLException
+     * @throws java.net.URISyntaxException
      */
     @RequestMapping(method = RequestMethod.GET)
     public String getAteriat() throws SQLException, URISyntaxException {
@@ -74,7 +92,9 @@ public class AteriaController {
      *
      * Poistaa tietyn aterian
      *
-     * @param id Tietyn Aterian ID
+     * @param Id Tietyn Aterian ID
+     * @throws java.net.URISyntaxException
+     * @throws java.sql.SQLException
      */
     @RequestMapping(value = "/{Id}", method = RequestMethod.DELETE)
     public String deleteTAteria(@PathVariable int Id) throws URISyntaxException, SQLException {
@@ -89,21 +109,21 @@ public class AteriaController {
      *
      * Päivitttää tietyn aterian tietoja.
      *
-     * @param id Tietyn Aterian ID
+     * @param Id Tietyn Aterian ID
      * @param kuvaus Aterian uusi kuvaus
      * @param hinta Aterian uusi hinta
+     * @param saatavilla Onko ateria saatavilla
+     * @throws java.net.URISyntaxException
+     * @throws java.sql.SQLException
      *
      */
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST)
     public String updateAteria(@PathVariable int Id, @RequestParam String kuvaus, @RequestParam int hinta, @RequestParam boolean saatavilla) throws URISyntaxException, SQLException {
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement statement = connection.createStatement();
-        //statement.execute("UPDATE Ateria SET kuvaus='" + kuvaus + ", hinta=" + hinta + " WHERE id=" + Id);
-        //statement.execute("UPDATE Ateria SET kuvaus='" + kuvaus + "', hinta=" + hinta + ", saatavilla=" + saatavilla + " WHERE id=" + Id);
-        String statementS = "UPDATE ateria SET hinta='"+hinta+"', saatavilla='"+saatavilla+"', kuvaus='"+kuvaus+"' WHERE id='"+Id+"'";
+        String statementS = "UPDATE ateria SET hinta='" + hinta + "', saatavilla='" + saatavilla + "', kuvaus='" + kuvaus + "' WHERE id='" + Id + "'";
         statement.execute(statementS);
         connection.close();
-        //System.out.println(kuvaus);
         return statementS;
     }
 
@@ -111,21 +131,18 @@ public class AteriaController {
      *
      * Lisää uuden Aterian tietokantaan
      *
-     * @param Aterianvalmistaja_id Aterian valmistajan id
      * @param nimi Aterian nimi
      * @param hinta Aterian hinta
      * @param saatavilla Onko ateria saatavilla
      * @param kuvaus Aterian kuvaus
+     * @throws java.net.URISyntaxException
+     * @throws java.sql.SQLException
      *
      */
     @RequestMapping(method = RequestMethod.POST)
     public String postAteria(@RequestParam String nimi, @RequestParam String hinta,
             @RequestParam String saatavilla, @RequestParam String kuvaus) throws URISyntaxException, SQLException {
-
-        //params.get
-        //t=t+params.get("name")+params.get("hinta");
-        //String statement = "INSERT INTO Ateria (nimi, hinta, saatavilla, kuvaus, lisatty) VALUES ('"+ nimi + "', '" + hinta + "', '"+saatavilla+", '" + kuvaus + "', now())";
-        String statement = "INSERT INTO ateria(nimi, hinta, saatavilla, kuvaus, lisatty) VALUES ('"+nimi+"', '"+hinta+"', '"+saatavilla+"', '"+kuvaus+"', now());";
+        String statement = "INSERT INTO ateria(nimi, hinta, saatavilla, kuvaus, lisatty) VALUES ('" + nimi + "', '" + hinta + "', '" + saatavilla + "', '" + kuvaus + "', now());";
         Connection connection = GetPostGreSQLConnection.getConnection();
         Statement SQLstatement = connection.createStatement();
         boolean done = SQLstatement.execute(statement);
