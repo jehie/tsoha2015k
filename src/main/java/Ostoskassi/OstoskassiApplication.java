@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * Luokka Spring-sovelluksen käynnistämiseen
+ * Luokka Spring-sovelluksen käynnistämiseen.
  *
  * @author Jesse
  */
