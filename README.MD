@@ -9,7 +9,7 @@ Sivun backend (tietokanta ja Spring) löytyy Herokusta ja staattinen Angular taa
 Linkit:
 
 * [Linkki Backend Sovellukseen] (https://intense-tundra-7058.herokuapp.com)
-* [Linkki FrontEnd osioon] (http://jehie.github.io/#) !Huom sivu ei päivity vielä automaattisesti, joten kirjautuessa, poistaessa tai lisätessä tuotetta tulee refreshaa selain.
+* [Linkki FrontEnd osioon] (http://jehie.github.io/#) !Kokeile täältä!
 * [Linkki dokumentaatioon](https://github.com/jehie/tsoha2015k/blob/master/doc/Dokumentaatio.pdf)
 * [Linkki Index.html](https://github.com/jehie/OstosFront/blob/master/public_html/index.html)
 * [Linkki sovelluksen muihin HTML sivuihin](https://github.com/jehie/OstosFront/tree/master/public_html/views)
