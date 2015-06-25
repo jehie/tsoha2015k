@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Ostoskassi.Tilaus;
 
 import Ostoskassi.Ostoskassi.database.GetPostGreSQLConnection;
@@ -29,9 +24,9 @@ public class TilausController {
 
     /**
      *
-     * Palauttaa Aterian JSON-muodossa perustuen aterian ID:seen.
+     * Palauttaa Tilauksen perustuen käyttäjän sähköpostiin
      *
-     * @param id Tietyn Aterian ID
+     * @param email Käyttäjän sähköposti
      */
     @RequestMapping(value = "/{email:.+}", method = RequestMethod.GET)
     public String getTilauksetByEmail(@PathVariable String email) throws SQLException, URISyntaxException {
@@ -50,9 +45,8 @@ public class TilausController {
 
     /**
      *
-     * Palauttaa Aterian JSON-muodossa perustuen aterian ID:seen.
+     * Palauttaa Tilaukset JSON-muodossa.
      *
-     * @param id Tietyn Aterian ID
      */
     @RequestMapping(method = RequestMethod.GET)
     public String getTilaukset() throws SQLException, URISyntaxException {
@@ -69,6 +63,18 @@ public class TilausController {
 
     }
 
+    /**
+     *
+     * Palauttaa viimeisimmän tilauksen jonka kayttaja on tehnyt
+     *
+     * @param email käyttäjän sähköposti
+     * @param hinta Tilauksen yhteishinta
+     * @param lentoID Lennon ID
+     * @param ateriaID Aterian ID
+     * @return SQL Statement
+     * @throws java.net.URISyntaxException 
+     * @throws java.sql.SQLException 
+     */
     @RequestMapping(method = RequestMethod.POST)
     public String postTilaus(@RequestParam String email, @RequestParam int hinta,
             @RequestParam int lentoID, @RequestParam int ateriaID) throws URISyntaxException, SQLException {
@@ -81,6 +87,12 @@ public class TilausController {
         return statement;
     }
 
+    /**
+     *
+     * Palauttaa viimeisimmän tilauksen jonka kayttaja on tehnyt
+     *
+     * @param email käyttäjän sähköposti
+     */
     @RequestMapping(value = "/{email:.+}/last", method = RequestMethod.GET)
     public String getLastTilausByEmail(@PathVariable String email) throws SQLException, URISyntaxException {
 
@@ -98,9 +110,9 @@ public class TilausController {
 
     /**
      *
-     * Poistaa tietyn aterian
+     * Poistaa tietyn Tilauksen
      *
-     * @param id Tietyn Aterian ID
+     * @param Id Tietyn Tilauksen ID
      */
     @RequestMapping(value = "/{Id}", method = RequestMethod.DELETE)
     public String deleteTilaus(@PathVariable int Id) throws URISyntaxException, SQLException {
@@ -114,9 +126,9 @@ public class TilausController {
 
     /**
      *
-     * Poistaa tietyn aterian
+     * Asettaa tilauksen toimitetuksi
      *
-     * @param id Tietyn Aterian ID
+     * @param Id Tietyn Tilauksen ID
      */
     @RequestMapping(value = "/{Id}/toimita", method = RequestMethod.POST)
     public String toimitaTilaus(@PathVariable int Id) throws URISyntaxException, SQLException {
@@ -129,9 +141,9 @@ public class TilausController {
 
     /**
      *
-     * Poistaa tietyn aterian
+     * Päivittää Tilauksen hinnan
      *
-     * @param id Tietyn Aterian ID
+     * @param id Tietyn Tilauksen ID
      */
     @RequestMapping(value = "/{Id}/hinta", method = RequestMethod.POST)
     public String paivitaTilauksenHinta(@PathVariable int Id, @RequestParam int hinta) throws URISyntaxException, SQLException {
@@ -139,7 +151,7 @@ public class TilausController {
         Statement statement = connection.createStatement();
         statement.execute("UPDATE Tilaus SET yhteishinta=" + hinta + " WHERE id=" + Id);
         connection.close();
-        return "Tilaus toimitettu";
+        return "Tilaus paivitetty";
     }
 
 }

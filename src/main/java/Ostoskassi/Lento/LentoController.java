@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Luokka lentojen palauttamiseen
+ * Luokka lentojen hallintaan
  *
  * @author Jesse
  */
