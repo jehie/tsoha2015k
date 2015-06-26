@@ -8,6 +8,10 @@ Sovellusta voi testata alla olevasta FrontEnd linkistä. Sovellusta voi testata 
 Sivun backend (tietokanta ja Spring) löytyy Herokusta ja staattinen Angular taas gitio:sta. Eli jos ohjelman haluaa omalle koneelle, tällä hetkellä helpoiten tapa on ladata se herokuun, jonka postgresql tietokantaa se käyttää.
 
 Huom! Jos sivu ei näytä toimivan aluksi, tämä johtuu siitä että Heroku-sovellus ei ole sillä hetkellä käynnissä. Sen pitäisi kuitenkin käynnistyä sivulle menon jälkeen.
+
+Jos Tavaroiden tai Aterioiden saatavuus on false, ei niitä näytetä tavallisella käyttäjälle vaan ainoastaan Adminille. Admin voi taas asettaa tavarat saataville joilloin kaikki käyttäjät näkevät ne. 
+
+Johtuen Herokun hitausta ohjelmassa esiintyy joskus viivettä POSTauksien jälkeen, eli vaikka sivu refreshaa itsenä, ei ne aina näy samalla sekunnilla.
  
 Linkit:
 
