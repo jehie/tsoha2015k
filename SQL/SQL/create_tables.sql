@@ -19,38 +19,39 @@ CREATE TABLE TavaranValmistaja(
 
 CREATE TABLE Ateria(
   id SERIAL PRIMARY KEY,
-  Aterianvalmistaja_id INTEGER REFERENCES AterianValmistaja(id), 
   nimi varchar(50) NOT NULL,
   hinta int NOT NULL,
   saatavilla boolean DEFAULT TRUE,
   kuvaus varchar(400),
-  julkaistu DATE,
-  added DATE
+  lisatty DATE
 );
 
-CREATE TABLE AterianValmistaja(
+CREATE TABLE Lento(
   id SERIAL PRIMARY KEY,
-  nimi varchar(50) NOT NULL,
-  maa varchar(400),
-  added DATE
+  tunnus varchar(50) NOT NULL,
 );
 
 CREATE TABLE Kayttaja(
   id SERIAL PRIMARY KEY,
-  username varchar(20) NOT NULL,
-  password varchar(20) NOT NULL,
-  admin boolean DEFAULT false,
-  maa varchar(20),
-  added DATE
+  email varchar(50) NOT NULL,
+  admin boolean DEFAULT false
 );
 
-CREATE TABLE Tilaukset(
+CREATE TABLE Tilaus(
   id SERIAL PRIMARY KEY,
   tilaaja_id INTEGER REFERENCES Kayttaja(id), 
   toimitettu boolean DEFAULT false,
-  hinta int,
-  lentoID varchar(20),
+  ateria_id INTEGER REFERENCES Ateria(id),
+  yhteishinta int,
+  lentoID INTEGER REFERENCES Lento(id),
   added DATE
+);
+
+CREATE TABLE Tilaustiedot(
+  id SERIAL PRIMARY KEY,
+  tilausID INTEGER REFERENCES tilaus(id), 
+  tavaraID INTEGER REFERENCES tavara(id),
+  kpl INTEGER
 );
 
 
